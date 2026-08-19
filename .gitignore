@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Local tooling
+.claude/
+
+# Source material — originals stay on the design machine, the site only
+# needs the optimised copies in assets/
+ChatGPT Image*.png
+UNITED BLENDING*.mp4
+hf_*.mp4
+*.mov
+*.pdf
+about us backgrouind.png
+keysellingpoint*.png
+we are located at.png
+
+# Superseded files
+assets/hero.mp4
+index-3d-backup.html
+main-3d-backup.js
