@@ -18,6 +18,7 @@
 
   const DICT = {
     zh: {
+      "Specialise in Packaging Container.": "专注于容器包装。",
       "About": "关于我们", "Products": "产品", "Industries": "服务行业",
       "Contact": "联系我们", "Get a quote": "获取报价", "Email us": "电邮联系",
       "Home": "首页", "Company": "公司", "Careers": "招聘", "Group": "集团",
@@ -72,6 +73,7 @@
     },
 
     ms: {
+      "Specialise in Packaging Container.": "Pakar dalam Pembungkusan Kontena.",
       "About": "Tentang", "Products": "Produk", "Industries": "Industri",
       "Contact": "Hubungi", "Get a quote": "Dapatkan sebut harga", "Email us": "E-mel kami",
       "Home": "Laman utama", "Company": "Syarikat", "Careers": "Kerjaya", "Group": "Kumpulan",
@@ -126,6 +128,7 @@
     },
 
     id: {
+      "Specialise in Packaging Container.": "Spesialis Kemasan Kontainer.",
       "About": "Tentang", "Products": "Produk", "Industries": "Industri",
       "Contact": "Kontak", "Get a quote": "Minta penawaran", "Email us": "Email kami",
       "Home": "Beranda", "Company": "Perusahaan", "Careers": "Karier", "Group": "Grup",
@@ -180,6 +183,7 @@
     },
 
     fr: {
+      "Specialise in Packaging Container.": "Spécialiste de l'emballage industriel.",
       "About": "À propos", "Products": "Produits", "Industries": "Secteurs",
       "Contact": "Contact", "Get a quote": "Demander un devis", "Email us": "Écrivez-nous",
       "Home": "Accueil", "Company": "Société", "Careers": "Carrières", "Group": "Groupe",
@@ -234,6 +238,7 @@
     },
 
     de: {
+      "Specialise in Packaging Container.": "Spezialist für Industrieverpackungen.",
       "About": "Über uns", "Products": "Produkte", "Industries": "Branchen",
       "Contact": "Kontakt", "Get a quote": "Angebot anfordern", "Email us": "E-Mail senden",
       "Home": "Startseite", "Company": "Unternehmen", "Careers": "Karriere", "Group": "Gruppe",
@@ -288,6 +293,7 @@
     },
 
     es: {
+      "Specialise in Packaging Container.": "Especialistas en envases industriales.",
       "About": "Nosotros", "Products": "Productos", "Industries": "Sectores",
       "Contact": "Contacto", "Get a quote": "Solicitar presupuesto", "Email us": "Escríbanos",
       "Home": "Inicio", "Company": "Empresa", "Careers": "Empleo", "Group": "Grupo",
