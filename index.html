@@ -272,69 +272,6 @@
     margin: 0 8px;
   }
 
-  /* ---------- Group companies: static lockup + subsidiaries ---------- */
-  .partners { background: var(--soft); padding: 80px 0 90px; }
-  .partners .wrap { text-align: center; }
-  .p-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 26px;
-  }
-  .group-lockup {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-  }
-  .gl-mark { width: clamp(84px, 9vw, 118px); height: auto; flex: none; }
-  .gl-word { text-align: left; }
-  .gl-word b {
-    display: block;
-    font-size: clamp(34px, 3.6vw, 52px);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: #b0121a;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-  .gl-word span {
-    display: block;
-    margin-top: 6px;
-    font-size: clamp(15px, 1.6vw, 21px);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #2b2f38;
-    line-height: 1.3;
-  }
-  .gl-sub {
-    margin: 44px 0 46px;
-    font-size: 15px;
-    font-style: italic;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    color: var(--ink-soft);
-  }
-  .subs {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 28px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .sub-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-  .sub-item .p-logo { width: 64px; height: 64px; margin-bottom: 10px; }
-  .sub-item b { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
-  .sub-item span { font-size: 12px; line-height: 1.5; color: var(--ink-soft); max-width: 20ch; }
-
   /* ---------- About us: sunny field backdrop ---------- */
   .about {
     position: relative;
@@ -587,7 +524,7 @@
   .bulletin span { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
 
   /* ---------- Yard band ---------- */
-  .band-yard { background-image: url("assets/location.jpg"); padding: 110px 0 40px; background-position: center; }
+  .band-yard { background-image: url("assets/location.jpg?v=2"); padding: 110px 0 40px; background-position: center; }
   .yard-card {
     position: relative;
     max-width: 320px;
@@ -681,9 +618,6 @@
     .ksp-list { grid-template-columns: 1fr; }
     .about, .ksp-sec { min-height: auto; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .subs { grid-template-columns: repeat(2, 1fr); row-gap: 36px; }
-    .group-lockup { flex-direction: column; gap: 16px; }
-    .gl-word { text-align: center; }
     .wrap { padding: 0 22px; }
     nav { padding: 14px 22px; }
     nav.solid { padding: 12px 22px; }
@@ -764,80 +698,6 @@
   </div>
   <div class="shade"></div>
 </header>
-
-<!-- Group companies: static lockup + subsidiaries -->
-<section class="partners" id="group">
-  <div class="wrap">
-    <div class="p-eyebrow reveal">Members of</div>
-
-    <div class="group-lockup reveal">
-      <svg class="gl-mark" viewBox="0 0 100 100" aria-hidden="true">
-        <path d="M50 5 A45 45 0 0 0 50 95" fill="none" stroke="#b0121a" stroke-width="3.5"/>
-        <path d="M50 5 A45 45 0 0 1 50 95" fill="none" stroke="#2b2b30" stroke-width="3.5"/>
-        <path d="M69 9 L50 54" fill="none" stroke="#2b2b30" stroke-width="3"/>
-        <text x="47" y="56" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="15" fill="#2b2b30">TIDYWM</text>
-        <text x="47" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="6" letter-spacing="0.5" fill="#b0121a">WASTE MANAGEMENT</text>
-      </svg>
-      <div class="gl-word">
-        <b>Tidy</b>
-        <span>Waste Management<br />Group</span>
-      </div>
-    </div>
-
-    <div class="gl-sub reveal">List of subsidiary companies</div>
-
-    <div class="subs">
-      <div class="sub-item reveal">
-        <svg viewBox="0 0 60 60" class="p-logo" aria-hidden="true">
-          <circle cx="30" cy="26" r="21" fill="#b0121a"/>
-          <text x="30" y="32" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="17" fill="#fff">HAS</text>
-          <text x="30" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="9" letter-spacing="1" fill="#131a3a">INDUSTRIES</text>
-        </svg>
-        <b>HAS Industries</b>
-        <span>Collection &amp; sales of industrial packaging</span>
-      </div>
-      <div class="sub-item reveal">
-        <svg viewBox="0 0 60 60" class="p-logo" aria-hidden="true">
-          <circle cx="30" cy="30" r="22" fill="none" stroke="#b0121a" stroke-width="2.5"/>
-          <text x="30" y="24" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="8.5" letter-spacing="0.5" fill="#b0121a">TIDYCHEM</text>
-          <text x="30" y="45" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="20" fill="#b0121a">TC</text>
-        </svg>
-        <b>TidyChem</b>
-        <span>Recovery &amp; treatment of solvents</span>
-      </div>
-      <div class="sub-item reveal">
-        <svg viewBox="0 0 60 60" class="p-logo" aria-hidden="true">
-          <path d="M12 8 h11 v34 a7 7 0 0 0 7 7 h14 v-8 h-12 a2 2 0 0 1-2-2 V8 h-7 z" fill="#131a3a"/>
-          <rect x="26" y="14" width="19" height="26" rx="2.5" fill="#1c3fc0"/>
-          <rect x="26" y="20" width="19" height="2" fill="#dfe6f5"/>
-          <rect x="26" y="32" width="19" height="2" fill="#dfe6f5"/>
-          <ellipse cx="35.5" cy="14" rx="9.5" ry="2.6" fill="#4a6ede"/>
-        </svg>
-        <b>United Blending</b>
-        <span>New steel, PE drums &amp; IBC</span>
-      </div>
-      <div class="sub-item reveal">
-        <svg viewBox="0 0 60 60" class="p-logo" aria-hidden="true">
-          <path d="M30 6 l5 8 h-10 z" fill="#1f9d3d"/>
-          <path d="M46 20 l2 9 -8 -3 z" fill="#1f9d3d"/>
-          <path d="M14 20 l-2 9 8 -3 z" fill="#1f9d3d"/>
-          <text x="30" y="42" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="24" fill="#c8161d">Tidy</text>
-          <text x="30" y="53" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="6" letter-spacing="0.5" fill="#b0121a">DISPOSAL SERVICE</text>
-        </svg>
-        <b>Tidy Disposal</b>
-        <span>General waste collector</span>
-      </div>
-      <div class="sub-item reveal">
-        <svg viewBox="0 0 60 60" class="p-logo" aria-hidden="true">
-          <text x="30" y="34" text-anchor="middle" font-family="Impact, Inter, sans-serif" font-weight="700" font-size="26" fill="#131a3a">JN<tspan fill="#b0121a">S</tspan></text>
-          <text x="30" y="48" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="8" letter-spacing="1.5" fill="#131a3a">SOLUTIONS</text>
-        </svg>
-        <b>JNS Solutions</b>
-        <span>Logistics &amp; warehousing</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- About us: field backdrop -->
 <section class="about" id="about">
