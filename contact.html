@@ -6,7 +6,7 @@
 <title>Contact Us | United Blending Pte Ltd</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet" />
 <style>
   :root {
     --ink: #131a3a;
@@ -22,19 +22,18 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
     overflow-x: hidden;
   }
   img { display: block; max-width: 100%; }
   .wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
   .label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
+    font-size: clamp(15px, 1.15vw, 17px);
+    font-weight: 500;
+    letter-spacing: -0.005em;
     color: var(--brand);
   }
-  h1, h2 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; }
+  h1, h2 { font-weight: 400; letter-spacing: -0.03em; line-height: 1.06; }
 
   /* Load-in animation */
   .rise { opacity: 0; transform: translateY(24px); animation: rise .9s cubic-bezier(.22,.61,.36,1) forwards; }
@@ -329,7 +328,7 @@
 <section class="map-section">
   <iframe
     class="map"
-    src="https://www.google.com/maps?q=120+Pioneer+Road+%2301-02A+Singapore+639597&output=embed"
+    src="https://www.google.com/maps?q=United+Blending+Pte+Ltd,+120+Pioneer+Road,+Singapore+639597&output=embed"
     loading="lazy"
     referrerpolicy="no-referrer-when-downgrade"
     title="United Blending Pte Ltd, 120 Pioneer Road, Singapore 639597"

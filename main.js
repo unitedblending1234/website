@@ -39,14 +39,18 @@ let heroShown = false;
 function showHero() {
   if (heroShown) return;
   heroShown = true;
-  // The centered brand title stays put — only the side content fades in
+  // The helicopter has "landed": tell hero-barrel.js to drop the drum in.
+  // (flag as well as event, in case the module loads after this fires)
+  window.__heroLanded = true;
+  window.dispatchEvent(new Event("hero:landed"));
+  // Sub-line and button follow once the drum is on its way down
   heroReveals.forEach((el, i) =>
-    setTimeout(() => el.classList.add("in"), 350 + i * 160)
+    setTimeout(() => el.classList.add("in"), 900 + i * 160)
   );
 }
 if (video) {
   video.addEventListener("ended", showHero, { once: true });
-  setTimeout(showHero, 9500);
+  setTimeout(showHero, 11000);
 } else {
   showHero();
 }
@@ -61,7 +65,7 @@ if (video && videoTitle) {
     }
   };
   video.addEventListener("timeupdate", onTime);
-  setTimeout(() => videoTitle.classList.add("show"), 6000); // fallback
+  setTimeout(() => videoTitle.classList.add("show"), 7000); // fallback
 }
 
 // ---------- Industries marquee: duplicate the row for a seamless loop ----------
