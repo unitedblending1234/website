@@ -39,6 +39,45 @@
   h1, h2 { font-weight: 400; letter-spacing: -0.03em; line-height: 1.06; }
   h2 { font-size: clamp(32px, 3.8vw, 52px); }
 
+  /* ---------- Preloader: the name writes itself in, left to right ---------- */
+  html.preloading { overflow: hidden; }
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s cubic-bezier(.76, 0, .24, 1);
+    /* safety net: if scripts never run, get out of the way on its own */
+    animation: preFail .01s 9s forwards;
+  }
+  .preloader.done { transform: translateY(-100%); }
+  @keyframes preFail { to { visibility: hidden; } }
+  .pre-mark {
+    height: clamp(40px, 4.4vw, 56px);
+    width: auto;
+    margin-bottom: 18px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: preIn .8s cubic-bezier(.22, .61, .36, 1) .15s forwards;
+  }
+  /* the wordmark is unmasked from the left edge to the right */
+  .pre-logo {
+    width: min(260px, 56vw);
+    height: auto;
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-26px);
+    animation: preWipe 1.5s cubic-bezier(.65, 0, .35, 1) .45s forwards;
+  }
+  @keyframes preIn { to { opacity: 1; transform: none; } }
+  @keyframes preWipe { to { clip-path: inset(0 0 0 0); transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .pre-mark, .pre-logo { animation: none; opacity: 1; transform: none; clip-path: none; }
+  }
+
   /* ---------- Reveal animations ---------- */
   .reveal {
     transition: opacity .9s cubic-bezier(.22, .61, .36, 1), transform .9s cubic-bezier(.22, .61, .36, 1);
@@ -142,60 +181,50 @@
     inset: 0;
     background: linear-gradient(180deg, rgba(10, 16, 46, 0.35) 0%, rgba(10, 16, 46, 0) 35%, rgba(10, 16, 46, 0.55) 100%);
   }
-  .hero-barrel { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  /* The drum lives on a fixed layer so it can keep falling past the hero */
+  .hero-barrel { position: fixed; inset: 0; z-index: 5; pointer-events: none; }
   .hero-barrel canvas { display: block; width: 100%; height: 100%; }
   .video-title {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: 6;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 17vh;
+    padding-top: 18vh;
     text-align: center;
     pointer-events: none;
     opacity: 0;
     transform: scale(0.74);
     transition:
-      transform 2.1s cubic-bezier(.22, .61, .36, 1),
-      opacity 1.7s ease;
+      transform 1.5s cubic-bezier(.22, .61, .36, 1),
+      opacity 1.2s ease;
   }
   .video-title.show { opacity: 1; transform: scale(1); }
+  /* Hero heading group: header, sub-header and button sit close together */
   .vt-main {
+    max-width: 13em;
     font-family: "Geist", "Helvetica Neue", sans-serif;
     font-weight: 500;
-    font-size: clamp(44px, 7.6vw, 118px);
-    line-height: 1;
+    font-size: clamp(38px, 5.7vw, 88px);
+    line-height: 1.02;
     letter-spacing: -0.045em;
+    text-wrap: balance;
     text-shadow: 0 6px 30px rgba(6, 10, 30, 0.45);
   }
-  .vt-sub {
-    margin-top: 14px;
-    font-family: "Geist", sans-serif;
-    font-weight: 400;
-    font-size: clamp(15px, 1.5vw, 20px);
-    letter-spacing: -0.01em;
-    opacity: .92;
-    text-shadow: 0 3px 16px rgba(6, 10, 30, 0.5);
-  }
-
-  .hero .hero-content {
-    position: absolute;
-    left: 48px;
-    right: 48px;
-    bottom: 96px;
-    max-width: 760px;
-  }
   .hero-sub-title {
-    margin-top: 26px;
-    font-size: clamp(19px, 2vw, 28px);
+    max-width: 34em;
+    margin-top: 16px;
+    padding: 0 24px;
+    font-size: clamp(15px, 1.45vw, 20px);
     font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-    text-shadow: 0 3px 16px rgba(6, 10, 30, 0.5);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    opacity: .95;
+    text-shadow: 0 3px 16px rgba(6, 10, 30, 0.55);
   }
-  .video-title .btn-row { justify-content: center; margin-top: 26px; }
+  .video-title .btn-row { justify-content: center; margin-top: 20px; }
   .video-title .btn { pointer-events: auto; }
   .btn-row { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
   .btn {
@@ -249,7 +278,7 @@
   }
   .g-card {
     background: #fff;
-    border-radius: 18px;
+    border-radius: 0;
     overflow: hidden;
     box-shadow: 0 2px 14px rgba(19, 26, 58, 0.06);
     transition: transform .3s, box-shadow .3s;
@@ -275,72 +304,138 @@
     margin: 0 8px;
   }
 
-  /* ---------- About us: sunny field backdrop ---------- */
+  /* ---------- About us: centred statement, words light up on scroll ---------- */
   .about {
     position: relative;
-    background: url("assets/about-bg.jpg?v=2") center / cover no-repeat;
-    color: var(--ink);
-    /* 16:9 photo: full-height section shows the whole frame, not a slice */
-    min-height: 100vh;
+    height: 220vh;              /* scroll distance the reveal plays over */
+    background-color: var(--paper);
+    background-image: radial-gradient(rgba(19, 26, 58, 0.16) 1px, transparent 1.6px);
+    background-size: 88px 88px;
+    background-position: center top;
+  }
+  .about-pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     display: flex;
-    align-items: flex-start;
-    padding: 16vh 0 110px;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 24px 60px;
   }
-  .about .wrap { position: relative; width: 100%; }
-  .about .label {
-    font-size: clamp(32px, 3.8vw, 52px);
+  .about-inner { width: 100%; text-align: center; }
+  .about-eyebrow {
+    font-size: clamp(15px, 1.15vw, 17px);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: rgba(19, 26, 58, 0.45);
+    margin-bottom: 26px;
+  }
+  .about-statement {
+    margin: 0 auto;
+    max-width: min(920px, calc(100vw - 48px));
+    font-size: clamp(23px, 3.05vw, 44px);
     font-weight: 400;
-    letter-spacing: -0.03em;
-    margin-bottom: 16px;
-    display: block;
+    line-height: 1.14;
+    letter-spacing: -0.032em;
+    color: var(--ink);
   }
-  .about-h { font-size: clamp(24px, 2.6vw, 36px); margin: 12px 0 18px; }
-  .about p {
-    font-size: 15px;
-    line-height: 1.9;
-    color: rgba(19, 26, 58, 0.82);
-    max-width: 620px;   /* stops short of the tree on the right */
-    margin-bottom: 12px;
+  .about-statement p + p { margin-top: 0.85em; }
+  .about-statement .w { opacity: 0.14; transition: opacity .25s linear; }
+  @media (min-width: 1100px) {
+    /* leaves a clear margin on the right for the falling drum */
+    .about-statement { max-width: min(920px, calc(100vw - 460px)); }
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 
-  /* ---------- Key selling points: handshake backdrop ---------- */
-  .ksp-sec {
-    position: relative;
-    background: url("assets/ksp-bg.jpg?v=2") center / cover no-repeat;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 100px 0;
-  }
-  .ksp-sec .wrap { position: relative; width: 100%; }
-  .ksp-sec .label {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.92);
-    color: var(--brand);
-    padding: 8px 14px;
-    border-radius: 8px;
-  }
-  .ksp-list {
+  /* ---------- Key selling points: four joined cards ---------- */
+  .ksp-sec { background: var(--soft); padding: 120px 0 130px; }
+  .ksp-sec h2 { margin-bottom: 46px; }
+  .ksp-sec .wrap { position: relative; z-index: 6; }   /* above the drum: it passes behind the cards */
+  .ksp-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 22px;
-    max-width: 430px;   /* stacks in the open corridor, clear of the people */
+    grid-template-columns: repeat(4, 1fr);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    overflow: hidden;
   }
   .ksp {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: rgba(255, 255, 255, 0.94);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 15px 20px;
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(330px, 29vw, 420px);
+    padding: 30px 28px 32px;
+    border-left: 1px solid var(--line);
     color: var(--ink);
-    box-shadow: 0 8px 24px rgba(19, 26, 58, 0.12);
+    cursor: default;
+    transition: color .4s ease;
   }
-  .ksp .n { font-weight: 700; font-size: 14px; color: var(--brand); flex: none; }
-  .ksp b { font-size: 14.5px; font-weight: 600; line-height: 1.4; }
+  .ksp:first-child { border-left: 0; }
+  /* photo sits behind the text and fades up on hover */
+  .ksp-photo {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.08);
+    transition: opacity .5s ease, transform .9s cubic-bezier(.22, .61, .36, 1);
+  }
+  .ksp-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28, 63, 192, 0.55) 0%, rgba(14, 24, 74, 0.72) 45%, rgba(10, 16, 46, 0.94) 100%);
+  }
+  .ksp-in {
+    position: relative;
+    height: 100%;
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .ksp { display: flex; }
+  .ksp-in { flex: 1; min-height: 0; }
+  .ksp .n { font-size: 15px; font-weight: 500; color: var(--brand); transition: color .4s ease; }
+  .ksp h3 {
+    font-size: clamp(19px, 1.85vw, 27px);
+    font-weight: 400;
+    line-height: 1.16;
+    letter-spacing: -0.025em;
+  }
+  .ksp-desc {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(10px);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+    transition: max-height .5s ease, opacity .4s ease, transform .5s ease, margin-top .5s ease;
+  }
+  .ksp:hover, .ksp:focus-visible, .ksp.open { color: #fff; outline: none; }
+  .ksp:hover .n, .ksp:focus-visible .n, .ksp.open .n { color: #fff; }
+  .ksp:hover .ksp-photo, .ksp:focus-visible .ksp-photo, .ksp.open .ksp-photo { opacity: 1; transform: none; }
+  .ksp:hover .ksp-desc, .ksp:focus-visible .ksp-desc, .ksp.open .ksp-desc {
+    max-height: 9em;
+    opacity: 1;
+    transform: none;
+    margin-top: 12px;
+  }
+  /* touch screens have no hover: show photo and description straight away */
+  @media (hover: none) {
+    .ksp { color: #fff; }
+    .ksp .n { color: #fff; }
+    .ksp-photo { opacity: 1; transform: none; }
+    .ksp-desc { max-height: none; opacity: 1; transform: none; margin-top: 12px; }
+  }
 
   /* ---------- Industries we serve: moving carousel ---------- */
   .industries { background: var(--paper); padding: 78px 0 110px; overflow: hidden; }
@@ -365,7 +460,6 @@
     animation: indslide 38s linear infinite;
   }
   @keyframes indslide { to { transform: translateX(-50%); } }
-  .ind-marquee:hover .ind-track { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) {
     .ind-track { animation: none; }
     .ind-marquee { overflow-x: auto; }
@@ -375,7 +469,7 @@
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    border-radius: 16px;
+    border-radius: 0;
     box-shadow: 0 6px 22px rgba(19, 26, 58, 0.10);
   }
   /* Label sits above the photo, so nothing covers the image */
@@ -426,7 +520,7 @@
     flex: none;
     width: clamp(260px, 24vw, 360px);
     aspect-ratio: 3 / 4.3;
-    border-radius: 18px;
+    border-radius: 0;
     overflow: hidden;
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
     transition: transform .35s cubic-bezier(.22,.61,.36,1);
@@ -517,18 +611,18 @@
     gap: 16px;
     align-items: center;
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: 0;
     padding: 18px 20px;
     transition: transform .25s, box-shadow .25s;
     background: #fff;
   }
   .bulletin:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(19, 26, 58, 0.09); }
-  .bulletin img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; flex: none; }
+  .bulletin img { width: 60px; height: 60px; border-radius: 0; object-fit: cover; flex: none; }
   .bulletin b { display: block; font-size: 15px; font-weight: 600; margin-bottom: 3px; }
   .bulletin span { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
 
   /* ---------- Yard band ---------- */
-  .band-yard { background-image: url("assets/location.jpg?v=2"); padding: 110px 0 40px; background-position: center; }
+  .band-yard { background-image: url("assets/location.jpg?v=3"); padding: 110px 0 40px; background-position: center; }
   .yard-card {
     position: relative;
     max-width: 320px;
@@ -536,7 +630,7 @@
     margin-top: 150px;   /* pushed hard toward the bottom-right */
     background: rgba(10, 16, 46, 0.88);
     backdrop-filter: blur(8px);
-    border-radius: 14px;
+    border-radius: 0;
     padding: 18px 20px;
   }
   .yard-h {
@@ -619,61 +713,43 @@
   .foot-legal a:hover { color: #fff; }
 
   @media (max-width: 960px) {
-    .ksp-list { grid-template-columns: 1fr; }
-    .about, .ksp-sec { min-height: auto; }
+    .about { height: 200vh; }
+    .ksp-sec { padding: 84px 0 90px; }
+    .ksp-grid { grid-template-columns: 1fr 1fr; }
+    .ksp { min-height: 300px; padding: 24px 20px 26px; }
+    .ksp:nth-child(odd) { border-left: 0; }
+    .ksp:nth-child(n + 3) { border-top: 1px solid var(--line); }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .wrap { padding: 0 22px; }
     nav { padding: 14px 22px; }
     nav.solid { padding: 12px 22px; }
     nav ul { display: none; }
-    .hero-barrel { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-  .hero-barrel canvas { display: block; width: 100%; height: 100%; }
-  .video-title {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 17vh;
-    text-align: center;
-    pointer-events: none;
-    opacity: 0;
-    transform: scale(0.74);
-    transition:
-      transform 2.1s cubic-bezier(.22, .61, .36, 1),
-      opacity 1.7s ease;
-  }
-  .video-title.show { opacity: 1; transform: scale(1); }
-  .vt-main {
-    font-family: "Geist", "Helvetica Neue", sans-serif;
-    font-weight: 500;
-    font-size: clamp(44px, 7.6vw, 118px);
-    line-height: 1;
-    letter-spacing: -0.045em;
-    text-shadow: 0 6px 30px rgba(6, 10, 30, 0.45);
-  }
-  .vt-sub {
-    margin-top: 14px;
-    font-family: "Geist", sans-serif;
-    font-weight: 400;
-    font-size: clamp(15px, 1.5vw, 20px);
-    letter-spacing: -0.01em;
-    opacity: .92;
-    text-shadow: 0 3px 16px rgba(6, 10, 30, 0.5);
-  }
-
-  .hero .hero-content { left: 22px; right: 22px; bottom: 80px; }
+    .hero .hero-content { left: 22px; right: 22px; bottom: 80px; }
     .intro .grid { grid-template-columns: 1fr; gap: 18px; }
     .gallery { grid-template-columns: 1fr; }
     .g-card, .g-card:nth-child(1), .g-card:nth-child(2) { grid-column: span 1; }
     .bulletins { grid-template-columns: 1fr; }
     .foot-grid { grid-template-columns: 1fr 1fr; }
   }
+  @media (max-width: 600px) {
+    .ksp-grid { grid-template-columns: 1fr; }
+    .ksp { min-height: 240px; border-left: 0; }
+    .ksp:nth-child(n + 2) { border-top: 1px solid var(--line); }
+  }
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("preloading");</script>
+<link rel="preload" as="image" href="assets/logo-word.png" />
+
+<!-- Preloader -->
+<div class="preloader" id="preloader" data-noi18n aria-hidden="true">
+  <img class="pre-mark" src="assets/logo-mark.png" alt="" />
+  <img class="pre-logo" src="assets/logo-word.png" alt="" />
+</div>
+
+<!-- 3D drum: fixed layer, lands in the hero then keeps falling on scroll -->
+<div class="hero-barrel" id="heroBarrel" aria-hidden="true"></div>
 
 <nav id="nav">
   <a class="logo" href="#top" aria-label="United Blending home"><img class="nav-word" src="assets/logo-word.png" alt="United Blending Pte Ltd" /></a>
@@ -691,39 +767,66 @@
 
 <!-- Hero: brand video plays once, then holds on its final frame -->
 <header class="hero" id="top">
-  <video id="heroVideo" autoplay muted playsinline preload="auto" poster="assets/hero-jurong-poster.jpg">
+  <video id="heroVideo" muted playsinline preload="auto" poster="assets/hero-jurong-poster.jpg">
     <source src="assets/hero-jurong.mp4" type="video/mp4" />
   </video>
   <div class="shade"></div>
-  <div class="hero-barrel" id="heroBarrel" aria-hidden="true"></div>
   <div class="video-title" id="videoTitle">
-    <div class="vt-main">United Blending</div>
-    <div class="vt-sub">Pte Ltd · Singapore</div>
-    <h2 class="hero-sub-title reveal">Specialise in Packaging Container</h2>
+    <h1 class="vt-main">Specialise in Packaging Container</h1>
+    <p class="hero-sub-title reveal">Steel drums, HDPE drums, IBCs, jerrycans and pallets, supplied from Singapore since 2003.</p>
     <div class="btn-row reveal">
       <a class="btn gold" href="contact.html">Talk to us</a>
     </div>
   </div>
 </header>
 
-<!-- About us: field backdrop -->
+<!-- About us: centred statement, words light up as you scroll -->
 <section class="about" id="about">
-  <div class="wrap">
-    <div class="label reveal r-left">About us</div>
-    <p class="reveal">Established since 2003 with a humble beginning in commodity trading, mainly dealing with Steel drums and other Packaging Container items.</p>
-    <p class="reveal">To this day, we remain as one of the closest business alliance partners, supplying Steel drums mainly to the major oil giants in the Oil &amp; Gas industry.</p>
+  <div class="about-pin">
+    <div class="about-inner">
+      <div class="about-eyebrow">About us</div>
+      <!-- real copy (read by screen readers and the translator) -->
+      <p class="about-src sr-only">Established since 2003 with a humble beginning in commodity trading, mainly dealing with Steel drums and other Packaging Container items.</p>
+      <p class="about-src sr-only">To this day, we remain as one of the closest business alliance partners, supplying Steel drums mainly to the major oil giants in the Oil &amp; Gas industry.</p>
+      <!-- main.js splits the copy above into words here -->
+      <div class="about-statement" id="aboutStatement" data-noi18n aria-hidden="true"></div>
+    </div>
   </div>
 </section>
 
-<!-- Key selling points: handshake backdrop -->
+<!-- Key selling points: four joined cards -->
 <section class="ksp-sec">
   <div class="wrap">
-    <div class="label reveal r-left">Our key selling points</div>
-    <div class="ksp-list">
-      <div class="ksp reveal r-left"><span class="n">01</span><b>Have a good listening ear</b></div>
-      <div class="ksp reveal r-left"><span class="n">02</span><b>Solving your problems</b></div>
-      <div class="ksp reveal r-left"><span class="n">03</span><b>Flexible &amp; always accommodating to customers' needs</b></div>
-      <div class="ksp reveal r-left"><span class="n">04</span><b>Working towards cost savings for our customers</b></div>
+    <h2 class="reveal">Our key selling points</h2>
+    <div class="ksp-grid">
+      <div class="ksp" tabindex="0">
+        <div class="ksp-photo" style="background-image:url('assets/ksp-listen.jpg?v=1');background-position:center 20%"></div>
+        <div class="ksp-in reveal">
+          <span class="n">01</span>
+          <div class="ksp-text"><h3>Have a good listening ear</h3><p class="ksp-desc">We take the time to understand your product, your volumes and your timelines before we recommend anything.</p></div>
+        </div>
+      </div>
+      <div class="ksp" tabindex="0">
+        <div class="ksp-photo" style="background-image:url('assets/ksp-solve.jpg?v=1');background-position:center 20%"></div>
+        <div class="ksp-in reveal">
+          <span class="n">02</span>
+          <div class="ksp-text"><h3>Solving your problems</h3><p class="ksp-desc">Tight deadline or an unusual requirement? We work out a practical solution and see it through to delivery.</p></div>
+        </div>
+      </div>
+      <div class="ksp" tabindex="0">
+        <div class="ksp-photo" style="background-image:url('assets/ksp-handshake.jpg?v=2');background-position:center 20%"></div>
+        <div class="ksp-in reveal">
+          <span class="n">03</span>
+          <div class="ksp-text"><h3>Flexible &amp; always accommodating to customers' needs</h3><p class="ksp-desc">Order sizes, delivery schedules and packaging options are adjusted to suit the way you operate.</p></div>
+        </div>
+      </div>
+      <div class="ksp" tabindex="0">
+        <div class="ksp-photo" style="background-image:url('assets/ksp-save.jpg?v=1');background-position:center 20%"></div>
+        <div class="ksp-in reveal">
+          <span class="n">04</span>
+          <div class="ksp-text"><h3>Working towards cost savings for our customers</h3><p class="ksp-desc">We look for ways to bring your packaging costs down, from the right container choice to smarter delivery.</p></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -736,14 +839,14 @@
   </div>
   <div class="ind-marquee">
     <div class="ind-track" id="indTrack">
-      <div class="ind-card"><div class="ind-name">Oil &amp; Gas</div><img src="assets/ind-oilgas.jpg" alt="Oil and Gas" draggable="false" /></div>
-      <div class="ind-card"><div class="ind-name">Special Chemical</div><img src="assets/ind-chemical.jpg" alt="Special Chemical" draggable="false" /></div>
-      <div class="ind-card"><div class="ind-name">Industrial</div><img src="assets/ind-industrial.jpg" alt="Industrial" draggable="false" /></div>
-      <div class="ind-card"><div class="ind-name">Marine</div><img src="assets/ind-marine.jpg?v=2" alt="Marine" draggable="false" /></div>
-      <div class="ind-card"><div class="ind-name">Automotive</div><img src="assets/ind-automotive.jpg" alt="Automotive" draggable="false" /></div>
-      <div class="ind-card"><div class="ind-name">Food &amp; Beverage</div><img src="assets/ind-fnb.jpg" alt="Food and Beverage" draggable="false" /></div>
-      <div class="ind-card"><div class="ind-name">Agriculture &amp; Pesticides</div><img src="assets/ind-agriculture.jpg" alt="Agriculture and Pesticides" draggable="false" /></div>
-      <div class="ind-card"><div class="ind-name">Perfumery</div><img src="assets/ind-perfumery.jpg" alt="Perfumery" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Oil &amp; Gas</div><img src="assets/ind-oilgas.jpg?v=3" alt="Oil and Gas" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Special Chemical</div><img src="assets/ind-chemical.jpg?v=3" alt="Special Chemical" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Industrial</div><img src="assets/ind-industrial.jpg?v=3" alt="Industrial" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Marine</div><img src="assets/ind-marine.jpg?v=3" alt="Marine" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Automotive</div><img src="assets/ind-automotive.jpg?v=3" alt="Automotive" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Food &amp; Beverage</div><img src="assets/ind-fnb.jpg?v=3" alt="Food and Beverage" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Agriculture &amp; Pesticides</div><img src="assets/ind-agriculture.jpg?v=3" alt="Agriculture and Pesticides" draggable="false" /></div>
+      <div class="ind-card"><div class="ind-name">Perfumery</div><img src="assets/ind-perfumery.jpg?v=3" alt="Perfumery" draggable="false" /></div>
     </div>
   </div>
 </section>
@@ -873,9 +976,9 @@
   }
 }
 </script>
-<script type="module" src="hero-barrel.js?v=1"></script>
-<script src="assets/i18n.js?v=3"></script>
-<script src="main.js?v=933"></script>
+<script type="module" src="hero-barrel.js?v=4"></script>
+<script src="assets/i18n.js?v=5"></script>
+<script src="main.js?v=936"></script>
 
 </body>
 </html>

@@ -41,6 +41,11 @@
       "Solving your problems": "为您解决问题",
       "Flexible & always accommodating to customers' needs": "灵活应变，始终配合客户需求",
       "Working towards cost savings for our customers": "致力于为客户节省成本",
+      "We take the time to understand your product, your volumes and your timelines before we recommend anything.": "在提出任何建议之前，我们会先深入了解您的产品、用量和时间安排。",
+      "Tight deadline or an unusual requirement? We work out a practical solution and see it through to delivery.": "交期紧迫或需求特殊？我们会制定切实可行的方案，并跟进到交付为止。",
+      "Order sizes, delivery schedules and packaging options are adjusted to suit the way you operate.": "订单数量、交货时间和包装方案，均可按您的运作方式灵活调整。",
+      "We look for ways to bring your packaging costs down, from the right container choice to smarter delivery.": "从选择合适的容器到更高效的配送，我们不断为您降低包装成本。",
+      "Steel drums, HDPE drums, IBCs, jerrycans and pallets, supplied from Singapore since 2003.": "自 2003 年起从新加坡供应钢桶、HDPE 桶、IBC 吨桶、方桶和托盘。",
       "Industries we serve": "服务行业",
       "Trusted across eight industries.": "深受八大行业信赖。",
       "Oil & Gas": "石油与天然气", "Special Chemical": "特种化学品",
@@ -96,6 +101,11 @@
       "Solving your problems": "Menyelesaikan masalah anda",
       "Flexible & always accommodating to customers' needs": "Fleksibel & sentiasa memenuhi keperluan pelanggan",
       "Working towards cost savings for our customers": "Berusaha menjimatkan kos untuk pelanggan",
+      "We take the time to understand your product, your volumes and your timelines before we recommend anything.": "Kami mengambil masa untuk memahami produk, jumlah dan jadual anda sebelum mengesyorkan apa-apa.",
+      "Tight deadline or an unusual requirement? We work out a practical solution and see it through to delivery.": "Tarikh akhir yang ketat atau keperluan luar biasa? Kami mencari penyelesaian praktikal dan menguruskannya hingga penghantaran.",
+      "Order sizes, delivery schedules and packaging options are adjusted to suit the way you operate.": "Saiz pesanan, jadual penghantaran dan pilihan pembungkusan disesuaikan mengikut cara anda beroperasi.",
+      "We look for ways to bring your packaging costs down, from the right container choice to smarter delivery.": "Kami mencari cara untuk mengurangkan kos pembungkusan anda, daripada pilihan bekas yang tepat hingga penghantaran yang lebih bijak.",
+      "Steel drums, HDPE drums, IBCs, jerrycans and pallets, supplied from Singapore since 2003.": "Drum keluli, drum HDPE, IBC, jerikan dan palet, dibekalkan dari Singapura sejak 2003.",
       "Industries we serve": "Industri yang kami khidmati",
       "Trusted across eight industries.": "Dipercayai dalam lapan industri.",
       "Oil & Gas": "Minyak & Gas", "Special Chemical": "Bahan Kimia Khas",
@@ -151,6 +161,11 @@
       "Solving your problems": "Menyelesaikan masalah Anda",
       "Flexible & always accommodating to customers' needs": "Fleksibel & selalu memenuhi kebutuhan pelanggan",
       "Working towards cost savings for our customers": "Berupaya menghemat biaya bagi pelanggan",
+      "We take the time to understand your product, your volumes and your timelines before we recommend anything.": "Kami meluangkan waktu untuk memahami produk, volume, dan jadwal Anda sebelum merekomendasikan apa pun.",
+      "Tight deadline or an unusual requirement? We work out a practical solution and see it through to delivery.": "Tenggat ketat atau kebutuhan yang tidak biasa? Kami mencari solusi praktis dan mengawalnya hingga pengiriman.",
+      "Order sizes, delivery schedules and packaging options are adjusted to suit the way you operate.": "Jumlah pesanan, jadwal pengiriman, dan pilihan kemasan disesuaikan dengan cara Anda beroperasi.",
+      "We look for ways to bring your packaging costs down, from the right container choice to smarter delivery.": "Kami mencari cara untuk menekan biaya kemasan Anda, dari pilihan wadah yang tepat hingga pengiriman yang lebih cerdas.",
+      "Steel drums, HDPE drums, IBCs, jerrycans and pallets, supplied from Singapore since 2003.": "Drum baja, drum HDPE, IBC, jeriken, dan palet, dipasok dari Singapura sejak 2003.",
       "Industries we serve": "Industri yang kami layani",
       "Trusted across eight industries.": "Dipercaya di delapan industri.",
       "Oil & Gas": "Minyak & Gas", "Special Chemical": "Bahan Kimia Khusus",
@@ -206,6 +221,11 @@
       "Solving your problems": "Résoudre vos problèmes",
       "Flexible & always accommodating to customers' needs": "Flexibles et toujours à l'écoute des besoins clients",
       "Working towards cost savings for our customers": "Œuvrer à réduire les coûts de nos clients",
+      "We take the time to understand your product, your volumes and your timelines before we recommend anything.": "Nous prenons le temps de comprendre votre produit, vos volumes et vos délais avant toute recommandation.",
+      "Tight deadline or an unusual requirement? We work out a practical solution and see it through to delivery.": "Délai serré ou besoin particulier ? Nous trouvons une solution pratique et la suivons jusqu'à la livraison.",
+      "Order sizes, delivery schedules and packaging options are adjusted to suit the way you operate.": "Tailles de commande, calendriers de livraison et options d'emballage s'adaptent à votre façon de travailler.",
+      "We look for ways to bring your packaging costs down, from the right container choice to smarter delivery.": "Nous cherchons à réduire vos coûts d'emballage, du bon choix de contenant à une livraison plus efficace.",
+      "Steel drums, HDPE drums, IBCs, jerrycans and pallets, supplied from Singapore since 2003.": "Fûts en acier, fûts HDPE, IBC, jerricans et palettes, fournis depuis Singapour depuis 2003.",
       "Industries we serve": "Les secteurs que nous servons",
       "Trusted across eight industries.": "La confiance de huit secteurs.",
       "Oil & Gas": "Pétrole et gaz", "Special Chemical": "Chimie de spécialité",
@@ -261,6 +281,11 @@
       "Solving your problems": "Wir lösen Ihre Probleme",
       "Flexible & always accommodating to customers' needs": "Flexibel und stets auf Kundenwünsche eingestellt",
       "Working towards cost savings for our customers": "Kostenersparnis für unsere Kunden",
+      "We take the time to understand your product, your volumes and your timelines before we recommend anything.": "Wir nehmen uns Zeit, Ihr Produkt, Ihre Mengen und Ihre Termine zu verstehen, bevor wir etwas empfehlen.",
+      "Tight deadline or an unusual requirement? We work out a practical solution and see it through to delivery.": "Enger Termin oder ungewöhnliche Anforderung? Wir finden eine praktische Lösung und begleiten sie bis zur Lieferung.",
+      "Order sizes, delivery schedules and packaging options are adjusted to suit the way you operate.": "Bestellmengen, Liefertermine und Verpackungsoptionen passen wir an Ihre Arbeitsweise an.",
+      "We look for ways to bring your packaging costs down, from the right container choice to smarter delivery.": "Wir suchen nach Wegen, Ihre Verpackungskosten zu senken, von der richtigen Behälterwahl bis zur klügeren Lieferung.",
+      "Steel drums, HDPE drums, IBCs, jerrycans and pallets, supplied from Singapore since 2003.": "Stahlfässer, HDPE-Fässer, IBC, Kanister und Paletten, seit 2003 aus Singapur geliefert.",
       "Industries we serve": "Branchen, die wir beliefern",
       "Trusted across eight industries.": "Vertrauen aus acht Branchen.",
       "Oil & Gas": "Öl & Gas", "Special Chemical": "Spezialchemie",
@@ -316,6 +341,11 @@
       "Solving your problems": "Resolver sus problemas",
       "Flexible & always accommodating to customers' needs": "Flexibles y siempre atentos a las necesidades del cliente",
       "Working towards cost savings for our customers": "Trabajar para ahorrar costes a nuestros clientes",
+      "We take the time to understand your product, your volumes and your timelines before we recommend anything.": "Nos tomamos el tiempo de entender su producto, sus volúmenes y sus plazos antes de recomendar nada.",
+      "Tight deadline or an unusual requirement? We work out a practical solution and see it through to delivery.": "¿Plazo ajustado o un requisito poco habitual? Buscamos una solución práctica y la seguimos hasta la entrega.",
+      "Order sizes, delivery schedules and packaging options are adjusted to suit the way you operate.": "Los tamaños de pedido, los calendarios de entrega y las opciones de envase se adaptan a su forma de trabajar.",
+      "We look for ways to bring your packaging costs down, from the right container choice to smarter delivery.": "Buscamos formas de reducir sus costes de envasado, desde la elección del envase adecuado hasta una entrega más eficiente.",
+      "Steel drums, HDPE drums, IBCs, jerrycans and pallets, supplied from Singapore since 2003.": "Bidones de acero, bidones HDPE, IBC, garrafas y palés, suministrados desde Singapur desde 2003.",
       "Industries we serve": "Sectores a los que servimos",
       "Trusted across eight industries.": "La confianza de ocho sectores.",
       "Oil & Gas": "Petróleo y gas", "Special Chemical": "Química especializada",
@@ -353,6 +383,7 @@
   function walk(node, fn) {
     if (node.nodeType === 3) return fn(node);
     if (node.nodeType !== 1 || SKIP.has(node.tagName)) return;
+    if (node.hasAttribute("data-noi18n")) return;   // generated or brand text
     for (const child of [...node.childNodes]) walk(child, fn);
   }
 
@@ -374,6 +405,8 @@
     });
     document.documentElement.lang = code;
     try { localStorage.setItem("ub-lang", code); } catch (e) {}
+    // Lets main.js rebuild anything it derives from translated copy
+    window.dispatchEvent(new CustomEvent("ub:lang", { detail: code }));
   }
 
   function build() {

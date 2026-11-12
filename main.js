@@ -13,59 +13,121 @@ function updateNav() {
 window.addEventListener("scroll", updateNav, { passive: true });
 updateNav();
 
-// ---------- Hero video: play once, then hold the final frame ----------
+// ---------- Hero: film plays once; drum drops, then the words come out ----------
 const video = document.getElementById("heroVideo");
-if (video) {
-  // No `loop` attribute: when it ends, the browser keeps the last frame.
-  const tryPlay = () => video.play().catch(() => {
-    // Autoplay blocked (rare with muted, but possible): play on first
-    // interaction instead of showing a frozen first frame forever.
-    const kick = () => {
-      video.play().catch(() => {});
-      window.removeEventListener("pointerdown", kick);
-      window.removeEventListener("keydown", kick);
-    };
-    window.addEventListener("pointerdown", kick);
-    window.addEventListener("keydown", kick);
-  });
-  tryPlay();
-}
-
-// ---------- Hero text waits for the video to finish ----------
-// The film carries the brand title; our headline fades in on the still
-// frame after it ends (with a fallback timer in case playback stalls).
+const videoTitle = document.getElementById("videoTitle");
 const heroReveals = Array.from(document.querySelectorAll(".hero .reveal"));
-let heroShown = false;
-function showHero() {
-  if (heroShown) return;
-  heroShown = true;
-  // The helicopter has "landed": tell hero-barrel.js to drop the drum in.
-  // (flag as well as event, in case the module loads after this fires)
-  window.__heroLanded = true;
-  window.dispatchEvent(new Event("hero:landed"));
-  // Sub-line and button follow once the drum is on its way down
+
+const DRUM_AT = 700;      // ms after the hero appears: drum starts falling
+const WORDS_AT = 2500;    // header comes out as the drum settles
+let heroStarted = false;
+
+function startHero() {
+  if (heroStarted) return;
+  heroStarted = true;
+
+  if (video) {
+    // No `loop` attribute: when it ends, the browser keeps the last frame.
+    video.play().catch(() => {
+      // Autoplay blocked (rare with muted, but possible): play on first
+      // interaction instead of showing a frozen first frame forever.
+      const kick = () => {
+        video.play().catch(() => {});
+        window.removeEventListener("pointerdown", kick);
+        window.removeEventListener("keydown", kick);
+      };
+      window.addEventListener("pointerdown", kick);
+      window.addEventListener("keydown", kick);
+    });
+  }
+
+  // 1. The drum drops down the middle (hero-barrel.js listens for this;
+  //    flag as well as event, in case the module loads after it fires)
+  setTimeout(() => {
+    window.__heroLanded = true;
+    window.dispatchEvent(new Event("hero:landed"));
+  }, DRUM_AT);
+
+  // 2. Then the header, followed by the sub-header and button
+  setTimeout(() => videoTitle && videoTitle.classList.add("show"), WORDS_AT);
   heroReveals.forEach((el, i) =>
-    setTimeout(() => el.classList.add("in"), 900 + i * 160)
+    setTimeout(() => el.classList.add("in"), WORDS_AT + 350 + i * 180)
   );
 }
-if (video) {
-  video.addEventListener("ended", showHero, { once: true });
-  setTimeout(showHero, 11000);
+
+// ---------- Preloader: logo wipes in left to right, then it lifts ----------
+const preloader = document.getElementById("preloader");
+if (preloader) {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const MIN = reduce ? 500 : 2500;                   // long enough to see the logo land
+  const t0 = performance.now();
+  let lifted = false;
+
+  const lift = () => {
+    if (lifted) return;
+    lifted = true;
+    preloader.classList.add("done");
+    document.documentElement.classList.remove("preloading");
+    startHero();                                     // film is moving as it appears
+    setTimeout(() => preloader.remove(), 1200);
+  };
+  // Lift once the animation has played and the page has loaded (6s at most)
+  const ready = () => setTimeout(lift, Math.max(0, MIN - (performance.now() - t0)));
+  if (document.readyState === "complete") ready();
+  else window.addEventListener("load", ready, { once: true });
+  setTimeout(lift, 6000);
 } else {
-  showHero();
+  startHero();
 }
 
-// Brand title pops in (small → big) halfway through the film and stays
-const videoTitle = document.getElementById("videoTitle");
-if (video && videoTitle) {
-  const onTime = () => {
-    if (video.duration && video.currentTime >= video.duration / 2) {
-      videoTitle.classList.add("show");
-      video.removeEventListener("timeupdate", onTime);
+// ---------- Selling points: tap toggles the photo + description (touch) ----------
+document.querySelectorAll(".ksp").forEach((card) => {
+  card.addEventListener("click", () => card.classList.toggle("open"));
+});
+
+// ---------- About: statement lights up word by word as you scroll ----------
+const aboutSec = document.getElementById("about");
+const aboutOut = document.getElementById("aboutStatement");
+if (aboutSec && aboutOut) {
+  let words = [];
+  const build = () => {
+    aboutOut.textContent = "";
+    words = [];
+    aboutSec.querySelectorAll(".about-src").forEach((src) => {
+      const text = src.textContent.trim();
+      // Languages without spaces (Chinese) reveal character by character
+      const spaced = /\s/.test(text);
+      const parts = spaced ? text.split(/\s+/) : Array.from(text);
+      const para = document.createElement("p");
+      parts.forEach((part, i) => {
+        const span = document.createElement("span");
+        span.className = "w";
+        span.textContent = part;
+        para.appendChild(span);
+        if (spaced && i < parts.length - 1) para.appendChild(document.createTextNode(" "));
+        words.push(span);
+      });
+      aboutOut.appendChild(para);
+    });
+    update();
+  };
+  const update = () => {
+    const r = aboutSec.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const travel = Math.max(1, r.height - vh);       // distance spent pinned
+    // begins as the section rises into view, done a little before it unpins
+    const p = Math.min(1, Math.max(0, (vh * 0.45 - r.top) / (vh * 0.45 + travel * 0.82)));
+    const n = words.length;
+    const SOFT = 5;                                  // words lit at once (soft edge)
+    for (let i = 0; i < n; i++) {
+      const o = Math.min(1, Math.max(0, (p * (n + SOFT) - i) / SOFT));
+      words[i].style.opacity = (0.14 + 0.86 * o).toFixed(3);
     }
   };
-  video.addEventListener("timeupdate", onTime);
-  setTimeout(() => videoTitle.classList.add("show"), 7000); // fallback
+  build();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  window.addEventListener("ub:lang", build);          // re-split translated copy
 }
 
 // ---------- Industries marquee: duplicate the row for a seamless loop ----------
